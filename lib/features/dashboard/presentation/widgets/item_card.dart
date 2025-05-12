@@ -23,29 +23,45 @@ class ItemCard extends StatelessWidget {
                     height: 140, width: double.infinity, fit: BoxFit.cover),
               ),
               Positioned(
-                top: 18,
+                top:100 ,
                 left: 8,
                 child: Container(
+                  height:28,
+                  width: 156,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: Colors.brown[700],
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: Color(0xffC25F30),
+                      width: 1,
+                    ),
                   ),
                   child: Row(
                     children: [
                       const Text('Pending Approval',
                           style: TextStyle(fontSize: 12)),
-                      Icon(Icons.arrow_drop_down_sharp,
-                          size: 12, color: Colors.white),
+                        SizedBox(width: 4),
+                      SvgPicture.asset(
+                        'assets/images/down.svg',
+                        height: 16,
+                      ),
                     ],
                   ),
                 ),
               ),
-              const Positioned(
+               Positioned(
                 top: 8,
                 right: 8,
-                child: Icon(Icons.more_vert, color: Colors.white),
+                child: Container(
+                  height: 32,
+                  width: 32,
+                  decoration: BoxDecoration(
+                    color: Color(0xFF262626),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(Icons.more_vert, color: Colors.white)),
               ),
             ],
           ),
