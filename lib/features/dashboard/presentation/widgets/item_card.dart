@@ -4,7 +4,57 @@ import '../../data/models/item_model.dart';
 
 class ItemCard extends StatelessWidget {
   final ItemModel item;
-  const ItemCard({super.key, required this.item});
+  ItemCard({super.key, required this.item});
+  final List<String> images = [
+    'assets/images/avatar.png',
+    'assets/images/avatar2.png',
+    'assets/images/avatar.png',
+    'assets/images/avatar2.png',
+    'assets/images/avatar.png'
+  ];
+  Widget buildAvatars(List<String> avatars) {
+    int maxVisible = 3;
+    int extra = avatars.length - maxVisible;
+
+    return SizedBox(
+      height: 24,
+      width: (avatars.length > maxVisible ? maxVisible + 1 : avatars.length) *
+          20.0,
+      child: Stack(
+        children: [
+          for (int i = 0; i < avatars.take(maxVisible).length; i++)
+            Positioned(
+              left: i * 12.0,
+              child: CircleAvatar(
+                radius: 12,
+                backgroundColor: Colors.black,
+                child: CircleAvatar(
+                  radius: 11,
+                  backgroundImage: AssetImage(avatars[i]),
+                ),
+              ),
+            ),
+          if (extra > 0)
+            Positioned(
+              left: maxVisible * 12.0,
+              child: CircleAvatar(
+                radius: 12,
+                backgroundColor: Colors.black,
+                child: CircleAvatar(
+                  radius: 11,
+                  backgroundColor: Colors.grey.shade800,
+                  child: Text(
+                    '+$extra',
+                    style:
+                        const TextStyle(color: Color(0xffFFC268), fontSize: 10),
+                  ),
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,91 +66,122 @@ class ItemCard extends StatelessWidget {
         children: [
           Stack(
             children: [
+              // Image with rounded top
               ClipRRect(
                 borderRadius:
                     const BorderRadius.vertical(top: Radius.circular(16)),
-                child: Image.asset(item.imageUrl,
-                    height: 140, width: double.infinity, fit: BoxFit.cover),
+                child: Image.asset(
+                  item.imageUrl,
+                  height: 140,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
               ),
+              // Bottom shadow on image
+              Positioned.fill(
+                //bottom: 0,
+                //left: 0,
+                //right: 0,
+                //height: 60,
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.transparent,
+                        Color(0xFF262626),
+                      ],
+                    ),
+                    
+                  ),
+                ),
+              ),
+              // Pending Approval badge
               Positioned(
-                top:100 ,
+                top: 110,
                 left: 8,
                 child: Container(
-                  height:28,
+                  height: 28,
                   width: 156,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: Colors.brown[700],
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                      color: Color(0xffC25F30),
-                      width: 1,
-                    ),
+                    border:
+                        Border.all(color: const Color(0xffC25F30), width: 1),
                   ),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('Pending Approval',
-                          style: TextStyle(fontSize: 12)),
-                        SizedBox(width: 4),
-                      SvgPicture.asset(
-                        'assets/images/down.svg',
-                        height: 16,
+                      const Text(
+                        'Pending Approval',
+                        style: TextStyle(fontSize: 12, color: Colors.white),
                       ),
+                      const SizedBox(width: 5),
+                      SvgPicture.asset('assets/images/down.svg'),
                     ],
                   ),
                 ),
               ),
-               Positioned(
+              // More icon
+              Positioned(
                 top: 8,
                 right: 8,
-                child: Container(
-                  height: 32,
-                  width: 32,
-                  decoration: BoxDecoration(
-                    color: Color(0xFF262626),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(Icons.more_vert, color: Colors.white)),
+                child: SvgPicture.asset("assets/images/Buttons.svg")
               ),
             ],
           ),
+          // Text + avatars + tasks
           Padding(
             padding: const EdgeInsets.all(12),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(item.title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontSize: 16)),
-                const SizedBox(height: 4),
+                Text(
+                  item.title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style:
+                      const TextStyle(fontSize: 18, color: Color(0xffFFFFFF)),
+                ),
+                const SizedBox(height: 6),
                 Row(
                   children: [
                     SvgPicture.asset('assets/images/calendar.svg', height: 16),
                     const SizedBox(width: 4),
-                    Text('${item.nights} Nights (${item.dateRange})',
-                        style:
-                            const TextStyle(fontSize: 12, color: Colors.grey)),
+                    Expanded(
+                      child: Text(
+                        '${item.nights} Nights (${item.dateRange})',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                            fontSize: 12, color: Color(0xff999999)),
+                      ),
+                    ),
                   ],
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 12),
+                Divider(
+                  color: const Color(0xff999999),
+                  height: 1,
+                ),
+                const SizedBox(height: 12),
                 Row(
                   children: [
-                    ...item.avatars.map((url) => Padding(
-                          padding: const EdgeInsets.only(right: 4),
-                          child: CircleAvatar(
-                              radius: 10, backgroundImage: NetworkImage(url)),
-                        )),
+                    buildAvatars(images),
                     const Spacer(),
-                    Text('${item.unfinishedTasks} unfinished tasks',
-                        style:
-                            const TextStyle(fontSize: 12, color: Colors.grey)),
+                    Text(
+                      '${item.unfinishedTasks} unfinished tasks',
+                      style: const TextStyle(
+                          fontSize: 12, color: Color(0xff999999)),
+                    ),
                   ],
-                )
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
