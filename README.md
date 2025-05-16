@@ -69,7 +69,6 @@ To ensure the UI works on **mobile, tablet, and desktop**:
 ## **📚 Resources**  
 - [Official Flutter Web Docs](https://flutter.dev/web)  
 - [Firebase Hosting Guide](https://firebase.google.com/docs/hosting)  
-- [Responsive Framework for Flutter](https://pub.dev/packages/responsive_framework)  
 
 ---
 
@@ -82,6 +81,6 @@ This project demonstrates:
 Deploy your own Flutter web app today! 🚀  
 
 ---
-**🔗 Live Demo:** [[Trip-Dashboard](https://trip-dashboard-613ec.web.app/)]
+**🔗 Live Demo:** [Trip-Dashboard](https://trip-dashboard-613ec.web.app/)
 
 ---
