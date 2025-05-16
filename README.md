@@ -90,6 +90,6 @@ This project demonstrates:
 Deploy your own Flutter web app today! 🚀  
 
 ---
-**🔗 Live Demo:** [[Hosting-URL.web.app](https://trip-dashboard-613ec.web.app/)](#)  
+**🔗 Live Demo:** [[Trip-Dashboard](https://trip-dashboard-613ec.web.app/)]
 
 ---
