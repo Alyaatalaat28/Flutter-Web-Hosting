@@ -19,15 +19,7 @@ This project shows how to **build, optimize, and deploy** a Flutter web app effi
 
 ---
 
-## **🖥️ Flutter Web vs. Mobile UI**  
-| Feature          | Flutter Web                          | Flutter Mobile                      |  
-|------------------|--------------------------------------|-------------------------------------|  
-| **Rendering**    | Compiled to HTML/CSS/JS (slower)     | Native ARM code (faster)            |  
-| **Navigation**   | Browser-based (URL routing)          | Native navigation stacks            |  
-| **Responsiveness** | Must handle varying screen sizes   | Fixed screen sizes (per device)     |  
-| **Touch vs. Hover** | Supports hover effects (`MouseRegion`) | Touch-only (no hover)            |  
-
-### **How to Adapt UI for Web:**  
+## 🖥️ **How to Adapt UI for Web:**  
 1. **Use `LayoutBuilder`/`MediaQuery`** for responsive layouts.  
 2. **Optimize assets** (web has larger file size constraints).  
 3. **Handle hover states** (e.g., buttons changing color on hover).  
